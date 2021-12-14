@@ -1,0 +1,266 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MasterPage.master.cs" Inherits="WebApp.MasterPage.MasterPage" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+    <title></title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <%--<link href="https://fonts.googleapis.com/css2?family=Mulish:wght@200&display=swap" rel="stylesheet">--%>
+    <link href="../css/sweetalert2.min.css" rel="stylesheet" />
+    <link href="../css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../Content/font-awesome.min.css" rel="stylesheet" />
+    <script src="../Js/jquery-3.6.0.min.js"></script>
+    <script src="../Js/sweetalert2.min.js"></script>
+    <script src="../Js/bootstrap.min.js"></script>
+
+    <style>
+        :root {
+            --primary: #00c1fb;
+            --light: #ffffff;
+            --grey: #efefef;
+        }
+
+        @font-face {
+            src: url('../css/static/Mulish-Light.ttf');
+            font-family: dwFonnt;
+        }
+
+        body {
+            overflow: hidden;
+            font-family: 'dwFonnt';
+            font-weight: 300;
+            color: #000000;
+        }
+
+        .title {
+            margin-top: 3vh;
+            font-size: 20px;
+            font-family: 'dwFonnt';
+            color: #686868;
+            text-align: center;
+            padding-bottom: 1vh;
+        }
+
+        .MenuColor {
+            background-color: #383838;
+        }
+
+        .SelectedRowColor {
+            background-color: #2032c2;
+        }
+
+        .StaticHeader th {
+            position: sticky;
+            top: 0;
+            color: #000000;
+        }
+
+        .Scroll {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .bg-primary {
+            background-color: var(--primary) !important;
+        }
+
+        .bg-light {
+            background-color: var(--light) !important;
+        }
+
+        #sidebar-container {
+            min-height: 100vh;
+            margin-left: -22rem;
+            transition: margin .25s ease-in-out;
+        }
+
+            #sidebar-container .logo {
+                padding: .875rem 1.25rem;
+            }
+
+                #sidebar-container .logo h4 {
+                    margin-top: 1%;
+                }
+
+                #sidebar-container .logo img {
+                    width: 147px;
+                    height: 45px;
+                }
+
+            #sidebar-container .menu {
+                width: 22rem;
+            }
+
+        #content-wrapper.toogled #sidebar-container {
+            margin-left: 0;
+        }
+
+
+        #menu-content {
+            width: 100%;
+            position: relative;
+            top: 0px;
+            left: 0px;
+            margin: 0px;
+            padding: 0px;
+        }
+
+            #menu-content li {
+                list-style: none;
+                font-size: 1.2em;
+                padding: 4px;
+                width: 100%;
+                margin-left: 0px !important;
+                transition: all 0.10s linear;
+            }
+
+                #menu-content li:hover {
+                    border-left: 3px solid #ffffff;
+                    background: #00c1fb;
+                    list-style: none;
+                    text-decoration-line: none;
+                }
+
+                #menu-content li a {
+                    padding: 4px;
+                }
+
+                    #menu-content li a:hover {
+                        color: #ffffff;
+                        list-style: none;
+                        text-decoration-line: none;
+                    }
+
+
+        .icon {
+            color: white;
+            font-size: 26px;
+            float: left;
+            padding: 1%;
+        }
+
+            .icon:hover {
+                cursor: pointer;
+                font-size: 27px;
+            }
+
+
+        a {
+            color: #ffffff;
+        }
+
+        .avatar {
+            max-width: 35px;
+        }
+
+        .navbar-light .navbar-nav .nav-link {
+            color: #ffffff;
+        }
+
+            .navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover {
+                color: #ffffff;
+            }
+
+            .navbar-light .navbar-nav .active > .nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show > .nav-link {
+                color: #ffffff;
+            }
+
+        @media (min-width: 760px) {
+            #sidebar-container {
+                margin-left: 0;
+            }
+
+            #page-container {
+                min-width: 0;
+                width: 100%;
+            }
+
+            #content-wrapper.toogled #sidebar-container {
+                margin-left: -22rem;
+            }
+        }
+    </style>
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+
+    <form id="frmContent" runat="server">
+        <asp:ScriptManager runat="server" EnablePageMethods="true" AsyncPostBackTimeout="360000" />
+        <div id="content-wrapper" class="d-flex">
+            <div id="sidebar-container" class="MenuColor">
+                <div class="logo text-center">
+                    <img src="../css/Images/Logo Universidad.png" />
+                </div>
+                <div class="menu">
+                    <ul id="menu-content">
+                        <li class="text-light">
+                            <asp:LinkButton ID="lkEstudiantes" OnClick="Redirecciona_click" runat="server" Style="color: #ffffff">
+                                    <i class="fa fa-users mr-2 lead" ></i> Estudiantes
+                            </asp:LinkButton>
+                        </li>
+                        <li>
+                            <asp:LinkButton ID="lkAsignaturas" OnClick="Redirecciona_click" runat="server" Style="color: #ffffff">
+                                    <i class="fa fa-file-text mr-2 lead" ></i> Asignaturas
+                            </asp:LinkButton>
+                        </li>
+                        <li>
+                            <asp:LinkButton ID="lkPeriodos" OnClick="Redirecciona_click" runat="server" Style="color: #ffffff">
+                                    <i class="fa fa-calendar mr-2 lead" ></i> Periodos
+                            </asp:LinkButton>
+                        </li>
+                        <li>
+                            <asp:LinkButton ID="lkNotas" OnClick="Redirecciona_click" runat="server" Style="color: #ffffff">
+                                    <i class="fa fa-folder-open mr-2 lead" ></i> Notas
+                            </asp:LinkButton>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+
+            <div id="page-container" class="w-100">
+                <nav class="navbar navbar-expand-lg navbar-light border-bottom MenuColor">
+                    <i id="iconMenu" class="fa fa-bars icon"></i>
+                    <asp:LinkButton ToolTip="Home"
+                        runat="server" ID="lkHome"><i class="fa fa-home icon"></i>
+                    </asp:LinkButton>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
+                                    <img src="../css/Images/avatar.jpg" class="img-fluid rounded-circle mr-2 avatar bg-light" />Usuario
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="../Login.aspx">Salir</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <div>
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+
+            $("#iconMenu").click(function (e) {
+                console.log("hola");
+                e.preventDefault();
+                $('#content-wrapper').toggleClass("toogled");
+            });
+
+        </script>
+    </form>
+</body>
+</html>
